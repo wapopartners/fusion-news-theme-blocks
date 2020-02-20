@@ -36,7 +36,7 @@ const SectionTitle = () => {
              <StyledLink
                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                href={child._id}
-               key={child.id}
+               key={child._id}
              >
                {`${child.name}${(content.children.length !== index + 1 && showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
              </StyledLink>

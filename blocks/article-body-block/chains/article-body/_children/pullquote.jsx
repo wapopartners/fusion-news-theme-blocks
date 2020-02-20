@@ -7,8 +7,9 @@ export default ({ element }) => {
   const pullQuote = [];
   contentElements.forEach((paragraph) => {
     if (paragraph.type === 'text'
-      && Object.prototype.hasOwnProperty.call(paragraph, 'content')) {
-      pullQuote.push(<p key={paragraph.id}>{ paragraph.content }</p>);
+      && Object.prototype.hasOwnProperty.call(paragraph, 'content')
+    ) {
+      pullQuote.push(<p key={paragraph._id}>{ paragraph.content }</p>);
     }
   });
   if (citation.type === 'text') {

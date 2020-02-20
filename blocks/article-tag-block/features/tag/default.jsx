@@ -28,7 +28,7 @@ const ArticleTags = () => {
         tags.map((tag) => {
           const slug = tag.slug || '#';
           const href = slug !== '#' ? encodeURI(`${location}/tags/${slug}`) : '#';
-          return <Tags key={slug} className="tags" href={href} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>;
+          return <Tags key={tag._id} className="tags" href={href} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>;
         })
       }
     </div>

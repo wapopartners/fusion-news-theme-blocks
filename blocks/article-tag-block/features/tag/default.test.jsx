@@ -11,10 +11,13 @@ describe('the article tag block', () => {
       globalContent: {
         taxonomy: {
           tags: [{
+            _id: 'dogs',
             description: 'dogs',
             slug: 'dogs slug',
             text: 'dogs text',
-          }, {
+          },
+          {
+            _id: 'cats',
             description: 'cats',
             slug: 'cats slug',
             text: 'cats text',
@@ -67,9 +70,12 @@ describe('the article tag block', () => {
           globalContent: {
             taxonomy: {
               tags: [{
+                _id: 'cats',
                 description: 'dogs',
                 text: 'dogs text',
-              }, {
+              }, 
+              {
+                _id: 'dogs',
                 description: 'cats',
                 text: 'cats text',
               }],

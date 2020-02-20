@@ -56,7 +56,7 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      console.log(wrapper.debug());
+      // console.log(wrapper.debug());
       expect(wrapper.find('article.article-body')).toHaveLength(1);
       expect(wrapper.find('article.article-body').find('div')).toHaveLength(2);
     });
