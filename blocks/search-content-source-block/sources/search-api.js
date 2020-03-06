@@ -1,9 +1,15 @@
+import getProperties from 'fusion:properties';
+
 export default {
   resolve(contentOptions) {
-    const { _id, 'arc-site': arcSite } = contentOptions;
-    return `content/v4?_id=${_id}&website=${arcSite}&published=false`;
+    const { query, page, 'arc-site': arcSite } = contentOptions;
+    if (query.length > 0) {
+      return `https://search.arcpublishing.com/search?&website_id=waff&q=${query}&page=${page || 1}&key=${getProperties(arcSite).searchKey}`;
+    }
+    return '';
   },
   params: {
-    _id: 'text',
+    query: 'text',
+    page: 'text',
   },
 };
