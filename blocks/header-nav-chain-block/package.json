@@ -26,10 +26,13 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "use-debounce": "latest",
+    "styled-components": "^4.4.0"
+  },
+  "devDependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/shared-styles": "latest",
-    "styled-components": "^4.4.0"
+    "@wpmedia/shared-styles": "latest"
   },
   "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
 }
