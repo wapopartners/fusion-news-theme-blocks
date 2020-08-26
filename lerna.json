@@ -8,6 +8,11 @@
     "**/node_modules/**",
     "**/package-lock.json"
   ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "useWorkspaces": true,
+  "npmClient": "yarn",
   "command": {
     "publish": {
       "registry": "https://npm.pkg.github.com"
