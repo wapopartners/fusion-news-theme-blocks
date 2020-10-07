@@ -31,7 +31,11 @@ function fixTrailingSlash(item) {
   return item;
 }
 
-const Link = ({ href, name, showSeparator }) => {
+// needs to take in display_name as well?
+// from footer
+const Link = ({
+  href, name, showSeparator,
+}) => {
   const externalUrl = /(http(s?)):\/\//i.test(href);
 
   return (

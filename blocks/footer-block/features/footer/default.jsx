@@ -16,7 +16,131 @@ const FooterSection = styled.ul`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const Footer = ({ customFields: { navigationConfig } }) => {
+const SocialButtons = ({ facebookPage, twitterUsername, rssUrl }) => (
+  <>
+    {
+        (facebookPage)
+          ? (
+            <a
+              title="Facebook page"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={facebookPage}
+            >
+              <FacebookAltIcon fill="#2980B9" />
+            </a>
+          )
+          : ''
+    }
+    {
+        (twitterUsername)
+          ? (
+            <a
+              title="Twitter feed"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://twitter.com/${twitterUsername}`}
+            >
+              <TwitterIcon fill="#2980B9" />
+            </a>
+          )
+          : ''
+    }
+    {
+        (rssUrl)
+          ? (
+            <a
+              title="RSS feed"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={rssUrl}
+            >
+              <RssIcon fill="#2980B9" />
+            </a>
+          )
+          : ''
+      }
+  </>
+);
+
+export const Footer = ({
+  primaryFont,
+  facebookPage,
+  twitterUsername,
+  rssUrl,
+  copyrightText,
+  logoUrl,
+  lightBackgroundLogo,
+  lightBackgroundLogoAlt,
+  primaryLogoAlt,
+  footerColumns = [],
+}) => (
+  <div className="container layout-section">
+    <div className="section-separator">
+      <section className="footer-header">
+        <div className="footer-row">
+          <div className="social-column">
+            <div className="socialBtn-container">
+              <SocialButtons
+                facebookPage={facebookPage}
+                twitterUsername={twitterUsername}
+                rssUrl={rssUrl}
+              />
+            </div>
+          </div>
+          <div className="copyright-column">
+            {/* If large screen, show copyright over border */}
+            <p className="copyright" id="copyright-top" style={{ width: '100%' }}>
+              {copyrightText}
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div>
+      {/* If small screen, show copyright under border */}
+      <p className="copyright" id="copyright-bottom" style={{ width: '100%' }}>
+        {copyrightText}
+      </p>
+    </div>
+    <div className="row legacy-footer-row">
+      {/* The columns are 2D arrays of columns x column items. Iterate through both */}
+      {footerColumns.map((column) => {
+        const columnItems = (column.children) ? column.children.map((item) => (
+          <li className="footer-item" key={item._id}>
+            {item.node_type === 'link' ? (<Link href={item.url} name={item.display_name}>{item.display_name}</Link>) : <Link href={item._id} name={item.name} />}
+          </li>
+        )) : [];
+
+        return (
+          <FooterSection
+            className="footer-section col-sm-12 col-md-6 col-lg-xl-3"
+            key={column._id}
+            primaryFont={primaryFont}
+          >
+            <section className="footer-header">{(column.name) ? column.name : ''}</section>
+            {columnItems}
+          </FooterSection>
+        );
+      })}
+    </div>
+    {
+    (logoUrl)
+      ? (
+        <div className="primaryLogo">
+          <img
+            src={logoUrl}
+            alt={(lightBackgroundLogo ? lightBackgroundLogoAlt : primaryLogoAlt) || 'Footer logo'}
+            className="footer-logo"
+          />
+        </div>
+      )
+      : null
+  }
+  </div>
+);
+
+const FooterContainer = ({ customFields: { navigationConfig } }) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
   const {
     facebookPage,
@@ -43,117 +167,24 @@ const Footer = ({ customFields: { navigationConfig } }) => {
 
   const footerColumns = (content && content.children) ? content.children : [];
 
-  const socialButtons = (
-    <>
-      {
-        (facebookPage)
-          ? (
-            <a
-              title="Facebook page"
-              target="_blank"
-              rel="noopener noreferrer"
-              href={facebookPage}
-            >
-              <FacebookAltIcon fill="#2980B9" />
-            </a>
-          )
-          : ''
-      }
-      {
-        (twitterUsername)
-          ? (
-            <a
-              title="Twitter feed"
-              target="_blank"
-              rel="noopener noreferrer"
-              href={`https://twitter.com/${twitterUsername}`}
-            >
-              <TwitterIcon fill="#2980B9" />
-            </a>
-          )
-          : ''
-      }
-      {
-        (rssUrl)
-          ? (
-            <a
-              title="RSS feed"
-              target="_blank"
-              rel="noopener noreferrer"
-              href={rssUrl}
-            >
-              <RssIcon fill="#2980B9" />
-            </a>
-          )
-          : ''
-      }
-    </>
-  );
-
+  const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
   return (
-    <div className="container layout-section">
-      <div className="section-separator">
-        <section className="footer-header">
-          <div className="footer-row">
-            <div className="social-column">
-              <div className="socialBtn-container">
-                {socialButtons}
-              </div>
-            </div>
-            <div className="copyright-column">
-              {/* If large screen, show copyright over border */}
-              <p className="copyright" id="copyright-top" style={{ width: '100%' }}>
-                {copyrightText}
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-      <div>
-        {/* If small screen, show copyright under border */}
-        <p className="copyright" id="copyright-bottom" style={{ width: '100%' }}>
-          {copyrightText}
-        </p>
-      </div>
-      <div className="row legacy-footer-row">
-        {/* The columns are 2D arrays of columns x column items. Iterate through both */}
-        {footerColumns.map((column) => {
-          const columnItems = (column.children) ? column.children.map((item) => (
-            <li className="footer-item" key={item._id}>
-              {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} /> : <Link href={item._id} name={item.name} />}
-            </li>
-          )) : [];
-
-          return (
-            <FooterSection
-              className="footer-section col-sm-12 col-md-6 col-lg-xl-3"
-              key={column._id}
-              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            >
-              <section className="footer-header">{(column.name) ? column.name : ''}</section>
-              {columnItems}
-            </FooterSection>
-          );
-        })}
-      </div>
-      {
-        (logoUrl)
-          ? (
-            <div className="primaryLogo">
-              <img
-                src={logoUrl}
-                alt={(lightBackgroundLogo ? lightBackgroundLogoAlt : primaryLogoAlt) || 'Footer logo'}
-                className="footer-logo"
-              />
-            </div>
-          )
-          : null
-      }
-    </div>
+    <Footer
+      primaryFont={primaryFont}
+      facebookPage={facebookPage}
+      twitterUsername={twitterUsername}
+      rssUrl={rssUrl}
+      copyrightText={copyrightText}
+      lightBackgroundLogo={lightBackgroundLogo}
+      lightBackgroundLogoAlt={lightBackgroundLogoAlt}
+      primaryLogo={primaryLogo}
+      primaryLogoAlt={primaryLogoAlt}
+      footerColumns={footerColumns}
+    />
   );
 };
 
-Footer.propTypes = {
+FooterContainer.propTypes = {
   customFields: PropTypes.shape({
     navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
       group: 'Configure Content',
@@ -162,6 +193,6 @@ Footer.propTypes = {
   }),
 };
 
-Footer.label = 'Footer – Arc Block';
+FooterContainer.label = 'Footer – Arc Block';
 
-export default Footer;
+export default FooterContainer;
