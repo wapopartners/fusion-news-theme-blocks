@@ -1,21 +1,41 @@
 {
    "global.gallery-expand-button":{
       "en":"Expand",
+      "fr":"",
+      "es":"",
+      "de":"",
+      "ko":"",
+      "ja":"",
       "sv":"Förstora",
       "no":"Utvid"
    },
    "global.gallery-page-count-text":{
       "en":"%{current} of %{total}",
+      "fr":"",
+      "es":"",
+      "de":"",
+      "ko":"",
+      "ja":"",
       "sv":"%{current} av %{total}",
       "no":"%{current} av %{total}"
    },
    "global.gallery-autoplay-button":{
       "en":"Autoplay",
+      "fr":"",
+      "es":"",
+      "de":"",
+      "ko":"",
+      "ja":"",
       "sv":"Spela upp",
       "no":"Autoavspilling"
    },
    "global.gallery-pause-autoplay-button":{
       "en":"Pause autoplay",
+      "fr":"",
+      "es":"",
+      "de":"",
+      "ko":"",
+      "ja":"",
       "sv":"Pausa",
       "no":"Sett autoavspilling på pause"
    }

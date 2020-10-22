@@ -1,11 +1,21 @@
 {
    "byline-block.by-text":{
       "en":"By",
+      "fr":"",
+      "es":"",
+      "de":"",
+      "ko":"",
+      "ja":"",
       "sv":"Av",
       "no":"Av"
    },
    "byline-block.and-text":{
       "en":"and",
+      "fr":"",
+      "es":"",
+      "de":"",
+      "ko":"",
+      "ja":"",
       "sv":"och",
       "no":"og"
    }

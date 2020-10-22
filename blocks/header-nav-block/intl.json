@@ -1,16 +1,31 @@
 {
     "header-nav-block.sections-button": {
         "en": "Sections",
+        "fr":"",
+        "es":"",
+        "de":"",
+        "ko":"",
+        "ja":"",
         "sv": "Meny",
         "no":"Deler"
     },
     "header-nav-block.sign-in-button": {
         "en": "Sign In",
+        "fr":"",
+        "es":"",
+        "de":"",
+        "ko":"",
+        "ja":"",
         "sv": "Logga in",
         "no":"Logg på"
     },
     "header-nav-block.search-text": {
         "en": "Search",
+        "fr":"",
+        "es":"",
+        "de":"",
+        "ko":"",
+        "ja":"",
         "sv": "Sök",
         "no":"Søk"
     }
