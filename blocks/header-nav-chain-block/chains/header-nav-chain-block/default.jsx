@@ -176,36 +176,55 @@ const Nav = (props) => {
     };
   }, [breakpoints]);
 
+  const logo = (
+    <div className={`nav-logo ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
+      <a href="/" title={primaryLogoAlt}>
+        {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
+      </a>
+    </div>
+  );
+
+  const searchBox = (
+    <>
+      <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} customSearchAction={customSearchAction} />
+      <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
+        <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
+        <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
+      </button>
+    </>
+  );
+
+  const styleSectionDrawer = (
+    <StyledSectionDrawer id="nav-sections" className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`} onClick={closeDrawer} font={primaryFont}>
+      <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
+        <SectionNav sections={sections}>
+          <SearchBox iconSize={21} alwaysOpen placeholderText={phrases.t('header-nav-chain-block.search-text')} />
+        </SectionNav>
+      </div>
+    </StyledSectionDrawer>
+  );
+
+  const leftComponentOneSlot = searchBox;
+  const leftComponentTwoSlot = logo;
+  const rightComponentOneSlot = signInButton;
+  const rightComponentTwoSlot = styleSectionDrawer;
+
   return (
     <>
       <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
         <div className="news-theme-navigation-container news-theme-navigation-bar">
           <div className="nav-left">
-            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} customSearchAction={customSearchAction} />
-            <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
-              <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
-              <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
-            </button>
+            {leftComponentOneSlot}
           </div>
 
-          <div className={`nav-logo ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
-            <a href="/" title={primaryLogoAlt}>
-              {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
-            </a>
-          </div>
+          {leftComponentTwoSlot}
 
           <div className="nav-right">
-            {signInButton}
+            {rightComponentOneSlot}
           </div>
         </div>
 
-        <StyledSectionDrawer id="nav-sections" className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`} onClick={closeDrawer} font={primaryFont}>
-          <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
-            <SectionNav sections={sections}>
-              <SearchBox iconSize={21} alwaysOpen placeholderText={phrases.t('header-nav-chain-block.search-text')} />
-            </SectionNav>
-          </div>
-        </StyledSectionDrawer>
+        {rightComponentTwoSlot}
 
       </StyledNav>
     </>
@@ -216,6 +235,30 @@ Nav.propTypes = {
   customFields: PropTypes.shape({
     hierarchy: PropTypes.string,
     signInOrder: PropTypes.number,
+    leftComponentOne: PropTypes.string
+      .tag({
+        name: 'Left Component 1',
+        defaultValue: 'Logo',
+        formPlugin: 'HeaderNavChainComponent',
+      }),
+    leftComponentTwo: PropTypes.string
+      .tag({
+        name: 'Left Component 2',
+        defaultValue: 'Section Menu',
+        formPlugin: 'HeaderNavChainComponent',
+      }),
+    rightComponentOne: PropTypes.string
+      .tag({
+        name: 'Right Component 1',
+        defaultValue: 'Sign In Button',
+        formPlugin: 'HeaderNavChainComponent',
+      }),
+    rightComponentTwo: PropTypes.string
+      .tag({
+        name: 'Right Component 2',
+        defaultValue: 'Search',
+        formPlugin: 'HeaderNavChainComponent',
+      }),
   }),
 };
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Plugin</title>
+</head>
+<body>
+<div></div>
+<label for="component">Select the component for the slot:</label>
+<select name="component" id="component">
+    <option value="logo">Logo</option>
+    <option value="selectionMenu">Selection Menu</option>
+    <option value="signInButton">Sign In Button</option>
+    <option value="search">Search</option>
+</select>
+
+<button id="save">Save</button>
+<button id="close">Close</button>
+
+<script>
+  window.initializePlugin = function({ field, initVal, onClose, onSave }) {
+    let selectedComponent = initVal || document.getElementById("component").value;
+
+    // document.querySelectorAll('.color').forEach(el => {
+    //   el.addEventListener('select', () => {
+    //     selectedColor = el.getAttribute('data-color')
+    //   })
+    // })
+
+    document.getElementById('save').addEventListener('select', () => {
+      onSave(selectedComponent)
+    })
+
+    document.getElementById('close').addEventListener('click', onClose)
+  }
+</script>
+</body>
+</html>
