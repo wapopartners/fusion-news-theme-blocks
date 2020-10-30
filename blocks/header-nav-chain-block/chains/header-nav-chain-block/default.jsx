@@ -239,25 +239,25 @@ Nav.propTypes = {
       .tag({
         name: 'Left Component 1',
         defaultValue: 'Logo',
-        formPlugin: 'HeaderNavChainComponent',
+        formPlugin: 'HeaderNavChain',
       }),
     leftComponentTwo: PropTypes.string
       .tag({
         name: 'Left Component 2',
         defaultValue: 'Section Menu',
-        formPlugin: 'HeaderNavChainComponent',
+        formPlugin: 'HeaderNavChain',
       }),
     rightComponentOne: PropTypes.string
       .tag({
         name: 'Right Component 1',
         defaultValue: 'Sign In Button',
-        formPlugin: 'HeaderNavChainComponent',
+        formPlugin: 'HeaderNavChain',
       }),
     rightComponentTwo: PropTypes.string
       .tag({
         name: 'Right Component 2',
         defaultValue: 'Search',
-        formPlugin: 'HeaderNavChainComponent',
+        formPlugin: 'HeaderNavChain',
       }),
   }),
 };

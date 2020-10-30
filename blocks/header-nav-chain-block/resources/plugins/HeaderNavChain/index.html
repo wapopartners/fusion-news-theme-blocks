@@ -21,13 +21,11 @@
   window.initializePlugin = function({ field, initVal, onClose, onSave }) {
     let selectedComponent = initVal || document.getElementById("component").value;
 
-    // document.querySelectorAll('.color').forEach(el => {
-    //   el.addEventListener('select', () => {
-    //     selectedColor = el.getAttribute('data-color')
-    //   })
-    // })
+    document.getElementById('component').addEventListener('change', (el) => {
+      selectedComponent= document.getElementById("component").value;
+    })
 
-    document.getElementById('save').addEventListener('select', () => {
+    document.getElementById('save').addEventListener('click', () => {
       onSave(selectedComponent)
     })
 
