@@ -7,7 +7,7 @@ on:
   # pull_request:
 
 jobs:
-  ensure_minimum_test_coverage:
+  ensure_minimum_test_coverage_linting:
     runs-on: ubuntu-latest
 
     steps:
