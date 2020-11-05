@@ -34,7 +34,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests with coverage
-        run: npm run test:coverage
+        run: npx lerna clean -y && npm run test:coverage
 
       - name: Check linting
         run: npm run lint
