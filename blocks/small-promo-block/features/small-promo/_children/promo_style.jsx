@@ -1,23 +1,23 @@
 function getPromoStyle(position = 'right', element = 'container') {
   const imagePositionClassMapping = {
     right: {
-      container: 'row',
+      container: 'image-right horizontal row',
       margin: 'image-right',
       headlineMargin: '',
     },
     left: {
-      container: 'row',
+      container: 'image-left horizontal row',
       margin: 'image-left',
       headlineMargin: 'margin-sm-left',
     },
     above: {
-      container: '',
+      container: 'image-above vertical',
       margin: ' image-above margin-sm-top margin-sm-bottom',
       headlineMargin: '',
     },
     below: {
-      container: '',
-      margin: 'image-below',
+      container: 'image-below vertical',
+      margin: 'margin-sm-top image-below',
       headlineMargin: '',
     },
   };
