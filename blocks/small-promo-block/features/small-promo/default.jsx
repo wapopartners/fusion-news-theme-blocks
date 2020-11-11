@@ -40,12 +40,14 @@ const SmallPromo = ({ customFields }) => {
 
   const imagePosition = customFields?.imagePosition || 'right';
 
+  const isHorizontalLayout = ['left', 'right'].includes(imagePosition);
+
   const promoContainersStyles = {
     containerClass: getPromoStyle(imagePosition, 'container'),
-    headlineClass: customFields.showImage
+    headlineClass: isHorizontalLayout && customFields.showImage
       ? 'col-sm-xl-8'
       : 'col-sm-xl-12 no-image-padding',
-    imageClass: 'col-sm-xl-4',
+    imageClass: isHorizontalLayout ? 'col-sm-xl-4' : '',
   };
 
   return content ? (
