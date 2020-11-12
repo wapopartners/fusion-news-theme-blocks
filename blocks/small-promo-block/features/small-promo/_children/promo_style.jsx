@@ -3,22 +3,22 @@ function getPromoStyle(position = 'right', element = 'container') {
     right: {
       container: 'image-right horizontal row',
       margin: 'image-right',
-      headlineMargin: '',
+      headlineMargin: 'margin-md-right',
     },
     left: {
       container: 'image-left horizontal row',
       margin: 'image-left',
-      headlineMargin: 'margin-sm-left',
+      headlineMargin: 'margin-md-left',
     },
     above: {
       container: 'image-above vertical',
-      margin: ' image-above margin-sm-top margin-sm-bottom',
-      headlineMargin: '',
+      margin: ' image-above',
+      headlineMargin: 'margin-md-top',
     },
     below: {
       container: 'image-below vertical',
-      margin: 'margin-sm-top image-below',
-      headlineMargin: '',
+      margin: 'margin-sm-bottom image-below',
+      headlineMargin: 'margin-md-bottom',
     },
   };
   const promoClasses = imagePositionClassMapping[position][element];
