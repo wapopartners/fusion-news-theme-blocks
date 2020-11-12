@@ -1,24 +1,24 @@
 function getPromoStyle(position = 'right', element = 'container') {
   const imagePositionClassMapping = {
     right: {
-      container: 'row',
-      margin: '',
-      headlineMargin: '',
+      container: 'image-right horizontal row',
+      margin: 'image-right',
+      headlineMargin: 'margin-md-right',
     },
     left: {
-      container: 'row',
-      margin: '',
-      headlineMargin: 'margin-sm-left',
+      container: 'image-left horizontal row',
+      margin: 'image-left',
+      headlineMargin: 'margin-md-left',
     },
     above: {
-      container: '',
-      margin: ' margin-sm-top margin-sm-bottom',
-      headlineMargin: '',
+      container: 'image-above vertical',
+      margin: ' image-above',
+      headlineMargin: 'margin-md-top',
     },
     below: {
-      container: '',
-      margin: '',
-      headlineMargin: '',
+      container: 'image-below vertical',
+      margin: 'margin-sm-bottom image-below',
+      headlineMargin: 'margin-md-bottom',
     },
   };
   const promoClasses = imagePositionClassMapping[position][element];

@@ -1,6 +1,11 @@
 .small-promo {
+
   color: $ui-primary-font-color;
   margin-top: 0;
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    min-height: calculateRem(80px);
+  }
+
   a {
     color: $ui-primary-font-color;
     position: relative;
@@ -12,6 +17,7 @@
 
   a > picture > img {
     vertical-align: middle;
+    width: 100%;
   }
 
   .sm-promo-headline {
