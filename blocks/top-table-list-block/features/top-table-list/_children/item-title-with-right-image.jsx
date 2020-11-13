@@ -2,8 +2,8 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
+import PromoLabel from '@wpmedia/label-box-block';
 import Title from './title';
-import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
 const ItemTitleWithRightImage = (props) => {

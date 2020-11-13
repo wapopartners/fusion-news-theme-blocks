@@ -5,10 +5,10 @@ import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
+import PromoLabel from '@wpmedia/label-box-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
 const HorizontalOverlineImageStoryItem = (props) => {
