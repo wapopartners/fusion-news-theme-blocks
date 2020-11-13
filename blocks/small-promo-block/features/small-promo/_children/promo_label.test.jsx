@@ -4,7 +4,7 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
-import PromoLabel from './promo_label';
+import PromoLabel from '@wpmedia/label-box-block';
 
 describe('the promo label', () => {
   beforeAll(() => {
@@ -67,13 +67,6 @@ describe('the promo label', () => {
     expect(wrapper.find('StyledComponent').at(0).prop('primaryColor')).toEqual('#ff0000');
     expect(wrapper.find('div.promo-label span').length).toBe(0);
     expect(wrapper.find('CameraIcon').length).toBe(1);
-  });
-
-  it('should not render an icon if label type is not recognized', () => {
-    const wrapper = mount(<PromoLabel type="PromoType" />);
-    expect(wrapper.find('div.promo-label').length).toBe(1);
-    expect(wrapper.find('div.promo-label span').text()).toBe('PromoType');
-    expect(wrapper.find('Icon').html()).toBeFalsy();
   });
 
   it('should not render an icon if label type is not recognized', () => {
