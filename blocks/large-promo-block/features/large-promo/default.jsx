@@ -20,7 +20,7 @@ import {
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
 
-import PromoLabel from './_children/promo_label';
+import PromoLabel from '@wpmedia/label-box-block';
 import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h2`
