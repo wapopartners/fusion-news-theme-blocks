@@ -5,7 +5,7 @@
   "author": "jackhowa",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "index.jsx",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
