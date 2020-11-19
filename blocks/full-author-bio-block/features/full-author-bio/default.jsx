@@ -121,6 +121,7 @@ const FullAuthorBio = () => {
                 resizedImageOptions={content.authors[0].resized_params}
                 resizerURL={getProperties(arcSite)?.resizerURL}
                 breakpoints={getProperties(arcSite)?.breakpoints}
+                compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
               />
             )
           }

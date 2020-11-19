@@ -39,6 +39,7 @@ class CustomSearchResultsList extends React.Component {
     };
     this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
     this.fetchPlaceholder();
+    this.shouldCompress = getProperties(props.arcSite).shouldCompress || false;
   }
 
   getFallbackImageURL() {
@@ -59,7 +60,11 @@ class CustomSearchResultsList extends React.Component {
       this.fetchContent({
         placeholderResizedImageOptions: {
           source: 'resize-image-api',
-          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+          query: {
+            raw_image_url: targetFallbackImage,
+            respect_aspect_ratio: true,
+            shouldCompress: this.shouldCompress,
+          },
         },
       });
     }
@@ -78,7 +83,10 @@ class CustomSearchResultsList extends React.Component {
       this.fetchContent({
         resultList: {
           source: searchContentConfig.contentService,
-          query: searchContentConfig.contentConfigValues,
+          query: {
+            ...searchContentConfig.contentConfigValues,
+            shouldCompress: this.shouldCompress,
+          },
           transform(results) {
             if (results) {
               // Add new data to previous list
@@ -96,7 +104,10 @@ class CustomSearchResultsList extends React.Component {
       this.fetchContent({
         resultList: {
           source: searchContentConfig.contentService,
-          query: searchContentConfig.contentConfigValues,
+          query: {
+            ...searchContentConfig.contentConfigValues,
+            shouldCompress: this.shouldCompress,
+          },
           transform(results) {
             if (results) {
               // Initializes storedList

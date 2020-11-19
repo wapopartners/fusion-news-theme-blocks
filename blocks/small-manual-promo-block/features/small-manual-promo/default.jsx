@@ -15,10 +15,15 @@ const HeadlineText = styled.h2`
 
 const SmallManualPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
+  const { shouldCompress = false } = getProperties(arcSite);
 
   const resizedImageOptions = useContent({
     source: 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
+    query: {
+      raw_image_url: customFields.imageURL,
+      'arc-site': arcSite,
+      shouldCompress,
+    },
   });
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
@@ -71,6 +76,7 @@ const SmallManualPromo = ({ customFields }) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
+                  compressedThumborParams={shouldCompress}
                 />,
               )}
             </div>

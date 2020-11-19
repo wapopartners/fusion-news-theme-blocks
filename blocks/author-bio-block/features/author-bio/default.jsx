@@ -68,6 +68,7 @@ const renderAuthorInfo = (author, arcSite) => {
           breakpoints={getProperties(arcSite)?.breakpoints}
           resizerURL={getProperties(arcSite)?.resizerURL}
           resizedImageOptions={resizedImageOptions}
+          compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
         />
       ) : null
   );

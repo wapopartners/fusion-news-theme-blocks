@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import Link from './_children/link';
 
@@ -15,13 +16,15 @@ const LinkBarSpan = styled.span`
 `;
 
 const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
+  const { id, arcSite } = useFusionContext();
+
   const content = useContent({
     source: navigationConfig.contentService,
     query: {
+      shouldCompress: getProperties(arcSite)?.shouldCompress || false,
       ...navigationConfig.contentConfigValues,
     },
   });
-  const { id, arcSite } = useFusionContext();
   const menuItems = (content && content.children) ? content.children : [];
   const showSeparator = !!(
     content

@@ -17,6 +17,7 @@ const StoryItem = (props) => {
     resizedImageOptions,
     placeholderResizedImageOptions,
     targetFallbackImage,
+    shouldCompress = false,
   } = props;
 
   return (
@@ -43,6 +44,7 @@ const StoryItem = (props) => {
               className="simple-list-img"
               breakpoints={getProperties(arcSite)?.breakpoints}
               resizerURL={getProperties(arcSite)?.resizerURL}
+              compressedThumborParams={shouldCompress}
             />
           ) : (
             <Image
@@ -57,6 +59,7 @@ const StoryItem = (props) => {
               breakpoints={getProperties(arcSite)?.breakpoints}
               resizedImageOptions={placeholderResizedImageOptions}
               resizerURL={getProperties(arcSite)?.resizerURL}
+              compressedThumborParams={shouldCompress}
             />
           )}
         </a>

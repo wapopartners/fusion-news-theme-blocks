@@ -37,6 +37,7 @@ class NumberedList extends Component {
     this.fetchStories();
     this.fetchPlaceholder();
     this.primaryFont = getThemeStyle(this.arcSite)['primary-font-family'];
+    this.shouldCompress = getProperties(this.arcSite).shouldCompress || false;
   }
 
   getFallbackImageURL() {
@@ -56,7 +57,10 @@ class NumberedList extends Component {
     this.fetchContent({
       resultList: {
         source: contentService,
-        query: contentConfigValues,
+        query: {
+          ...contentConfigValues,
+          shouldCompress: this.shouldCompress,
+        },
       },
     });
   }
@@ -68,7 +72,11 @@ class NumberedList extends Component {
       this.fetchContent({
         placeholderResizedImageOptions: {
           source: 'resize-image-api',
-          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+          query: {
+            raw_image_url: targetFallbackImage,
+            respect_aspect_ratio: true,
+            shouldCompress: this.shouldCompress,
+          },
         },
       });
     }
@@ -144,6 +152,7 @@ class NumberedList extends Component {
                       largeHeight={183}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={getProperties(arcSite)?.resizerURL}
+                      compressedThumborParams={this.shouldCompress}
                     />
                   ) : (
                     <Image
@@ -158,6 +167,7 @@ class NumberedList extends Component {
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizedImageOptions={placeholderResizedImageOptions}
                       resizerURL={getProperties(arcSite)?.resizerURL}
+                      compressedThumborParams={this.shouldCompress}
                     />
                   )}
                 </a>

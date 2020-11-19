@@ -36,10 +36,12 @@ const VideoPromo = ({ customFields }) => {
     live = false,
   } = customFields;
 
+  const { shouldCompress = false } = getProperties(arcSite);
+
   const content = uuid ? null : useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
-      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues, shouldCompress }
       : null,
   });
 

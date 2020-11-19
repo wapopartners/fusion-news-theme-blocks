@@ -35,10 +35,12 @@ const LargePromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
+  const { shouldCompress = false } = getProperties(arcSite);
+
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
-      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues, shouldCompress }
       : null,
   }) || null;
 
@@ -46,7 +48,7 @@ const LargePromo = ({ customFields }) => {
 
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
-    query: { raw_image_url: customFields.imageOverrideURL },
+    query: { raw_image_url: customFields.imageOverrideURL, shouldCompress },
   }) || undefined;
 
   const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
@@ -182,6 +184,7 @@ const LargePromo = ({ customFields }) => {
                         breakpoints={getProperties(arcSite)?.breakpoints}
                         resizerURL={getProperties(arcSite)?.resizerURL}
                         resizedImageOptions={resizedImageOptions}
+                        compressedThumborParams={shouldCompress}
                         // todo: should have resized params
                       />
                     )

@@ -69,24 +69,30 @@ class CardList extends React.Component {
 
   fetchPlaceholder() {
     const targetFallbackImage = this.getFallbackImageURL();
+    const { arcSite } = this.props;
+    const { shouldCompress = false } = getProperties(arcSite);
 
     if (!targetFallbackImage.includes('/resources/')) {
       this.fetchContent({
         placeholderResizedImageOptions: {
           source: 'resize-image-api',
-          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true, shouldCompress },
         },
       });
     }
   }
 
   fetchStories() {
-    const { customFields: { listContentConfig } } = this.props;
+    const { customFields: { listContentConfig }, arcSite } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
+    const { shouldCompress = false } = getProperties(arcSite);
     this.fetchContent({
       cardList: {
         source: contentService,
-        query: contentConfigValues,
+        query: {
+          shouldCompress,
+          ...contentConfigValues,
+        },
       },
     });
   }
@@ -154,6 +160,7 @@ class CardList extends React.Component {
                        resizedImageOptions={getResizedImage(contentElements[0].promo_items)}
                        breakpoints={getProperties(arcSite)?.breakpoints}
                        resizerURL={getProperties(arcSite)?.resizerURL}
+                       compressedThumborParams={getProperties(arcSite)?.shouldCompress}
                      />
                    ) : (
                      <Image
@@ -168,7 +175,7 @@ class CardList extends React.Component {
                        breakpoints={getProperties(arcSite)?.breakpoints}
                        resizedImageOptions={placeholderResizedImageOptions}
                        resizerURL={getProperties(arcSite)?.resizerURL}
-
+                       compressedThumborParams={getProperties(arcSite)?.shouldCompress}
                      />
                    )
                   }
@@ -248,6 +255,7 @@ class CardList extends React.Component {
                                   resizedImageOptions={extractResizedParams(element)}
                                   breakpoints={getProperties(arcSite)?.breakpoints}
                                   resizerURL={getProperties(arcSite)?.resizerURL}
+                                  compressedThumborParams={getProperties(arcSite)?.shouldCompress}
                                 />
                               )
                               : (
@@ -263,6 +271,7 @@ class CardList extends React.Component {
                                   breakpoints={getProperties(arcSite)?.breakpoints}
                                   resizedImageOptions={placeholderResizedImageOptions}
                                   resizerURL={getProperties(arcSite)?.resizerURL}
+                                  compressedThumborParams={getProperties(arcSite)?.shouldCompress}
                                 />
                               )
                           }

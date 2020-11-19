@@ -18,7 +18,7 @@ const fetch = (query) => {
     respectAspectRatio,
     query['arc-site'],
     undefined,
-    true,
+    query.shouldCompress || false,
   );
 };
 

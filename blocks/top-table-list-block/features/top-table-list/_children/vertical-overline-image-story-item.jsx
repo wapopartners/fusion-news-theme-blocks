@@ -138,6 +138,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                     largeHeight={ratios.largeHeight}
                     breakpoints={getProperties(arcSite)?.breakpoints}
                     resizerURL={getProperties(arcSite)?.resizerURL}
+                    compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
                   />
                 </a>
               ) : (
@@ -157,6 +158,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                     breakpoints={getProperties(arcSite)?.breakpoints}
                     resizedImageOptions={placeholderResizedImageOptions}
                     resizerURL={getProperties(arcSite)?.resizerURL}
+                    compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
                   />
                 )
               )}

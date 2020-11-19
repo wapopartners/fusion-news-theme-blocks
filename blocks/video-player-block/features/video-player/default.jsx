@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
+import getProperties from 'fusion:properties';
 import PropTypes from 'prop-types';
 import EmbedContainer from 'react-oembed-container';
 import './default.scss';
@@ -29,6 +30,7 @@ const VideoPlayer = (props) => {
       query: {
         website_url: websiteURL,
         site: arcSite,
+        shouldCompress: getProperties(arcSite).shouldCompress || false,
       },
     });
     embedHTML = fetchedEmbedMarkup;

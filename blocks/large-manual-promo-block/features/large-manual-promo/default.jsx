@@ -33,9 +33,15 @@ const LargeManualPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
+  const { shouldCompress = false } = getProperties(arcSite);
+
   const resizedImageOptions = useContent({
     source: 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
+    query: {
+      raw_image_url: customFields.imageURL,
+      'arc-site': arcSite,
+      shouldCompress,
+    },
   });
 
   const renderWithLink = useCallback((element, props) => (
@@ -74,6 +80,7 @@ const LargeManualPromo = ({ customFields }) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
+                  compressedThumborParams={shouldCompress}
                 />,
               )}
             </div>

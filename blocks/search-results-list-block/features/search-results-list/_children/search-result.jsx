@@ -39,6 +39,7 @@ const SearchResult = ({
     showByline,
     showDate,
   } = promoElements;
+  const { shouldCompress = false } = getProperties(arcSite);
 
   return (
     <div className="list-item" key={`result-card-${url}`}>
@@ -62,6 +63,7 @@ const SearchResult = ({
                 resizedImageOptions={resizedImageOptions}
                 resizerURL={getProperties(arcSite)?.resizerURL}
                 breakpoints={getProperties(arcSite)?.breakpoints}
+                compressedThumborParams={shouldCompress}
               />
             ) : (
               <Image
@@ -76,6 +78,7 @@ const SearchResult = ({
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizedImageOptions={placeholderResizedImageOptions}
                 resizerURL={getProperties(arcSite)?.resizerURL}
+                compressedThumborParams={shouldCompress}
               />
             )}
           </a>

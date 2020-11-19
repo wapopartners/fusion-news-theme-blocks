@@ -26,6 +26,7 @@ const HeadlineText = styled.h2`
 const SmallPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
+  const { shouldCompress = false } = getProperties(arcSite);
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -33,6 +34,7 @@ const SmallPromo = ({ customFields }) => {
       ? {
         'arc-site': arcSite,
         ...customFields.itemContentConfig.contentConfigValues,
+        shouldCompress,
       }
       : null,
   }) || null;
@@ -41,7 +43,7 @@ const SmallPromo = ({ customFields }) => {
 
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
-    query: { raw_image_url: customFields.imageOverrideURL },
+    query: { raw_image_url: customFields.imageOverrideURL, shouldCompress },
   }) || undefined;
 
   const headlineClass = customFields.showImage
@@ -103,6 +105,7 @@ const SmallPromo = ({ customFields }) => {
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={getProperties(arcSite)?.resizerURL}
                       resizedImageOptions={resizedImageOptions}
+                      compressedThumborParams={shouldCompress}
                     />
                   )
                   : (

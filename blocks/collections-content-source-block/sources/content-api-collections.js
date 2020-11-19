@@ -30,6 +30,6 @@ export default {
     null,
     query['arc-site'],
     undefined,
-    true,
+    query.shouldCompress || false,
   ),
 };

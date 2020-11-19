@@ -157,6 +157,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
                     largeHeight={ratios.largeHeight}
                     breakpoints={getProperties(arcSite)?.breakpoints}
                     resizerURL={getProperties(arcSite)?.resizerURL}
+                    compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
                   />
                   <PromoLabel type={promoType} />
                 </a>
@@ -178,6 +179,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
                     breakpoints={getProperties(arcSite)?.breakpoints}
                     resizedImageOptions={placeholderResizedImageOptions}
                     resizerURL={getProperties(arcSite)?.resizerURL}
+                    compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
                   />
                   <PromoLabel type={promoType} />
                 </div>

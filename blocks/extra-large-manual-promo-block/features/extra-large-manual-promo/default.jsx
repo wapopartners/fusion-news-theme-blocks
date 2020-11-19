@@ -34,7 +34,11 @@ const ExtraLargeManualPromo = ({ customFields }) => {
 
   const resizedImageOptions = useContent({
     source: 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
+    query: {
+      raw_image_url: customFields.imageURL,
+      'arc-site': arcSite,
+      shouldCompress: getProperties(arcSite)?.shouldCompress || false,
+    },
   });
 
   const renderWithLink = useCallback((element, props) => (
@@ -103,6 +107,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
+                  compressedThumborParams={getProperties(arcSite)?.shouldCompress}
                 />,
               )}
               {(customFields.showDescription && customFields.description)

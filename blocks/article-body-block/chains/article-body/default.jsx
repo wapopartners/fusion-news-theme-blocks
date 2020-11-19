@@ -183,6 +183,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
             autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
             pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
+            compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
           />
         </section>
       );

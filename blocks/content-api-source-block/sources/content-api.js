@@ -18,7 +18,7 @@ const transform = (data, query) => getResizedImageData(
   null,
   query['arc-site'],
   undefined,
-  true,
+  query.shouldCompress || false,
 );
 
 export default {

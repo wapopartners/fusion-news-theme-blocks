@@ -6,6 +6,7 @@ import getProperties from 'fusion:properties';
 const GlobalContentGallery = ({ phrases, arcSite }) => {
   const { globalContent = {} } = useAppContext();
   const { content_elements: contentElements = [] } = globalContent;
+
   return (
     <Gallery
       galleryElements={contentElements}
@@ -16,6 +17,7 @@ const GlobalContentGallery = ({ phrases, arcSite }) => {
       autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
       pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
       pageCountPhrase={(current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
+      compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
     />
   );
 };

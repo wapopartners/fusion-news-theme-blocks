@@ -42,6 +42,7 @@ class GlobalSearchResultsList extends React.Component {
     this.phrases = getTranslatedPhrases(this.locale);
     this.fetchPlaceholder();
     this.customSearchAction = props.customSearchAction || null;
+    this.shouldCompress = getProperties(this.arcSite).shouldCompress || false;
   }
 
   getFallbackImageURL() {
@@ -62,7 +63,11 @@ class GlobalSearchResultsList extends React.Component {
       this.fetchContent({
         placeholderResizedImageOptions: {
           source: 'resize-image-api',
-          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+          query: {
+            raw_image_url: targetFallbackImage,
+            respect_aspect_ratio: true,
+            shouldCompress: this.shouldCompress,
+          },
         },
       });
     }
@@ -86,6 +91,7 @@ class GlobalSearchResultsList extends React.Component {
           query: globalContent.metadata.q,
           // eslint-disable-next-line react/destructuring-assignment
           page: this.state.page.toString(),
+          shouldCompress: this.shouldCompress,
         },
         transform(results) {
           if (results) {

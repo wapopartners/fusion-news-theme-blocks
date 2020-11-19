@@ -13,6 +13,7 @@ class PlaceholderImage extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.getTargetFallbackImageUrl = this.getTargetFallbackImageUrl.bind(this);
     this.fetch();
+    this.shouldCompress = getProperties(props.arcSite).shouldCompress || false;
   }
 
   getTargetFallbackImageUrl() {
@@ -30,10 +31,15 @@ class PlaceholderImage extends React.Component {
 
   fetch() {
     const targetFallbackImage = this.getTargetFallbackImageUrl();
+
     this.fetchContent({
       resizedImageOptions: {
         source: 'resize-image-api',
-        query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        query: {
+          raw_image_url: targetFallbackImage,
+          respect_aspect_ratio: true,
+          shouldCompress: this.shouldCompress,
+        },
       },
     });
   }
@@ -63,6 +69,7 @@ class PlaceholderImage extends React.Component {
           largeHeight={largeHeight}
           resizedImageOptions={resizedImageOptions}
           resizerURL={getProperties(arcSite)?.resizerURL}
+          compressedThumborParams={this.shouldCompress}
         />
       </>
     );

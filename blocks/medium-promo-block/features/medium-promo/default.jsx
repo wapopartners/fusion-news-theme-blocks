@@ -33,12 +33,15 @@ const MediumPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
+  const { shouldCompress = false } = getProperties(arcSite);
+
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
       ? {
         'arc-site': arcSite,
         ...customFields.itemContentConfig.contentConfigValues,
+        shouldCompress,
       }
       : null,
   }) || null;
@@ -47,7 +50,7 @@ const MediumPromo = ({ customFields }) => {
 
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
-    query: { raw_image_url: customFields.imageOverrideURL },
+    query: { raw_image_url: customFields.imageOverrideURL, shouldCompress },
   }) || undefined;
 
   const headlineText = content && content.headlines ? content.headlines.basic : null;
@@ -155,6 +158,7 @@ const MediumPromo = ({ customFields }) => {
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={getProperties(arcSite)?.resizerURL}
                       resizedImageOptions={resizedImageOptions}
+                      compressedThumborParams={getProperties(arcSite)?.shouldCompress}
                     />
                   )
                   : (

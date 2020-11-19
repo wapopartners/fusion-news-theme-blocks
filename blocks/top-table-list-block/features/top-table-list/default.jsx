@@ -83,6 +83,8 @@ class TopTableListWrapper extends Component {
 
   fetchPlaceholder() {
     const targetFallbackImage = this.getFallbackImageURL();
+    const { arcSite } = this.props;
+    const { shouldCompress = false } = getProperties(arcSite);
 
     // using the fetchContent seems both more reliable
     // and allows for conditional calls whereas useContent hook does not
@@ -93,6 +95,7 @@ class TopTableListWrapper extends Component {
           query: {
             raw_image_url: targetFallbackImage,
             respect_aspect_ratio: true,
+            shouldCompress,
           },
         },
       });
@@ -149,7 +152,11 @@ const TopTableList = (props) => {
 
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
-    query: { 'arc-site': arcSite, ...contentConfigValues },
+    query: {
+      'arc-site': arcSite,
+      shouldCompress: getProperties(arcSite).shouldCompress || false,
+      ...contentConfigValues,
+    },
   }) || {};
 
   const siteContent = contentElements.reduce((acc, element) => {

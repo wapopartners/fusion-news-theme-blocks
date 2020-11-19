@@ -20,14 +20,16 @@ const DescriptionText = styled.p`
 const MediumManualPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
 
-  const resizedImageOptions = useContent({
-    source: 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
-  });
-
   const {
     breakpoints,
+    shouldCompress = false,
   } = getProperties(arcSite);
+
+  const resizedImageOptions = useContent({
+    source: 'resize-image-api',
+    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite, shouldCompress },
+  });
+
 
   const hasImage = customFields.showImage && customFields.imageURL;
 
@@ -64,6 +66,7 @@ const MediumManualPromo = ({ customFields }) => {
               breakpoints={breakpoints}
               resizerURL={getProperties(arcSite)?.resizerURL}
               resizedImageOptions={resizedImageOptions}
+              compressedThumborParams={shouldCompress}
             />, { className: 'image-link' },
           )}
           {(customFields.showHeadline || customFields.showDescription)

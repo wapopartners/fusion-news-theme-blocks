@@ -156,6 +156,7 @@ class LeadArt extends Component {
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={getProperties(arcSite)?.resizerURL}
                 resizedImageOptions={lead_art.resized_params}
+                compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
               />
             </div>
             {lightbox}
@@ -178,6 +179,7 @@ class LeadArt extends Component {
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            compressedThumborParams={getProperties(arcSite)?.shouldCompress || false}
           />
         );
       }

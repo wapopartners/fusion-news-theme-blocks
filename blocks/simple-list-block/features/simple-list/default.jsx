@@ -55,6 +55,8 @@ class SimpleListWrapper extends Component {
 
   fetchPlaceholder() {
     const targetFallbackImage = this.getFallbackImageURL();
+    const { arcSite } = this.props;
+    const { shouldCompress = false } = getProperties(arcSite);
 
     // using the fetchContent seems both more reliable
     // and allows for conditional calls whereas useContent hook does not
@@ -62,7 +64,11 @@ class SimpleListWrapper extends Component {
       this.fetchContent({
         placeholderResizedImageOptions: {
           source: 'resize-image-api',
-          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+          query: {
+            raw_image_url: targetFallbackImage,
+            respect_aspect_ratio: true,
+            shouldCompress,
+          },
         },
       });
     }
@@ -102,6 +108,7 @@ const SimpleList = (props) => {
 
   const {
     websiteDomain,
+    shouldCompress = false,
   } = getProperties(arcSite);
 
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
@@ -109,7 +116,7 @@ const SimpleList = (props) => {
   // need to inject the arc site here into use content
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
-    query: { 'arc-site': arcSite, ...contentConfigValues },
+    query: { 'arc-site': arcSite, shouldCompress, ...contentConfigValues, },
   }) || {};
 
   return (
@@ -136,6 +143,7 @@ const SimpleList = (props) => {
               placeholderResizedImageOptions={placeholderResizedImageOptions}
               targetFallbackImage={targetFallbackImage}
               arcSite={arcSite}
+              shouldCompress={shouldCompress}
             />
             <hr />
           </React.Fragment>
