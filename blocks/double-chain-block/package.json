@@ -1,10 +1,6 @@
 {
   "name": "@wpmedia/double-chain-block",
-<<<<<<< HEAD
-  "version": "5.9.0-beta.0",
-=======
   "version": "5.8.2",
->>>>>>> stable
   "description": "Double Chain – Arc Block",
   "author": "Luke Mason <luke.mason@washpost.com>",
   "contributors": [

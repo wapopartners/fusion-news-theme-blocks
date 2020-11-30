@@ -68,7 +68,6 @@ const ItemTitleWithRightImage = (props) => {
                 />
               </a>
             ) : (
-<<<<<<< HEAD
               <div className="image-wrapper">
                 <Image
                   compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
@@ -86,21 +85,6 @@ const ItemTitleWithRightImage = (props) => {
                 />
                 <PromoLabel type={promoType} size="small" />
               </div>
-=======
-              <Image
-                smallWidth={ratios.smallWidth}
-                smallHeight={ratios.smallHeight}
-                mediumWidth={ratios.mediumWidth}
-                mediumHeight={ratios.mediumHeight}
-                largeWidth={ratios.largeWidth}
-                largeHeight={ratios.largeHeight}
-                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                url={targetFallbackImage}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizedImageOptions={placeholderResizedImageOptions}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-              />
->>>>>>> stable
             )}
           </div>
           )}

@@ -32,7 +32,6 @@ const config = {
   showImageSM: true,
 };
 
-<<<<<<< HEAD
 // const headBelowConfig = {
 //   showOverlineXL: true,
 //   showHeadlineXL: true,
@@ -76,14 +75,6 @@ describe('horizontal overline image story item', () => {
       Image: () => <img alt="test" />,
     }));
   });
-=======
-jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => ({
-    arcSite: 'the-sun',
-    globalContent: {},
-  })),
-}));
->>>>>>> stable
 
 jest.mock('fusion:content', () => ({
   useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
