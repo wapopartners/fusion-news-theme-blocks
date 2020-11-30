@@ -3,8 +3,6 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import Title from './title';
-import PromoLabel from './promo_label';
-import discoverPromoType from './discover';
 
 const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
 
@@ -20,7 +18,6 @@ const ItemTitleWithRightImage = (props) => {
     resizedImageOptions,
     targetFallbackImage,
     placeholderResizedImageOptions,
-    element,
     paddingRight = false,
     imageRatio,
   } = props;
@@ -28,7 +25,6 @@ const ItemTitleWithRightImage = (props) => {
   const ratios = ratiosFor('SM', imageRatio);
   const onePerLine = customFields.storiesPerRowSM === 1;
   const promoClasses = `container-fluid small-promo layout-section ${onePerLine ? 'small-promo-one' : 'wrap-bottom'}`;
-  const promoType = discoverPromoType(element);
 
   return (
     <article
@@ -53,7 +49,7 @@ const ItemTitleWithRightImage = (props) => {
         }
         {customFields.showImageSM
           && (
-          <div className="col-sm-4 col-md-xl-4 flex-col">
+          <div className="col-sm-4 col-md-xl-4">
             {imageURL !== '' ? (
               <a href={websiteURL} title={itemTitle}>
                 <Image
@@ -70,9 +66,9 @@ const ItemTitleWithRightImage = (props) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                 />
-                <PromoLabel type={promoType} size="small" />
               </a>
             ) : (
+<<<<<<< HEAD
               <div className="image-wrapper">
                 <Image
                   compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
@@ -90,6 +86,21 @@ const ItemTitleWithRightImage = (props) => {
                 />
                 <PromoLabel type={promoType} size="small" />
               </div>
+=======
+              <Image
+                smallWidth={ratios.smallWidth}
+                smallHeight={ratios.smallHeight}
+                mediumWidth={ratios.mediumWidth}
+                mediumHeight={ratios.mediumHeight}
+                largeWidth={ratios.largeWidth}
+                largeHeight={ratios.largeHeight}
+                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                url={targetFallbackImage}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizedImageOptions={placeholderResizedImageOptions}
+                resizerURL={getProperties(arcSite)?.resizerURL}
+              />
+>>>>>>> stable
             )}
           </div>
           )}

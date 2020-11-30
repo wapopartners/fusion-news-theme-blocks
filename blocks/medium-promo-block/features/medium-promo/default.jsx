@@ -18,8 +18,6 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
-import PromoLabel from './_children/promo_label';
-import discoverPromoType from './_children/discover';
 
 const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
 
@@ -56,7 +54,7 @@ const MediumPromo = ({ customFields }) => {
   //   ? 'col-sm-12 col-md-xl-8 flex-col'
   //   : 'col-sm-xl-12 flex-col';
 
-  const promoType = discoverPromoType(content);
+  const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
 
   const headlineTmpl = () => {
     if (customFields.showHeadline && headlineText) {
@@ -142,44 +140,43 @@ const MediumPromo = ({ customFields }) => {
               ) */}
           {customFields.showImage
           && (
-            <a
-              className="image-link"
-              href={content.website_url}
-              title={content && content.headlines ? content.headlines.basic : ''}
-            >
-              {
-                customFields.imageOverrideURL || extractImageFromStory(content)
-                  ? (
-                    <Image
-                      compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
-                      url={customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL : extractImageFromStory(content)}
-                      alt={content && content.headlines ? content.headlines.basic : ''}
-                      // medium is 16:9
-                      smallWidth={ratios.smallWidth}
-                      smallHeight={ratios.smallHeight}
-                      mediumWidth={ratios.mediumWidth}
-                      mediumHeight={ratios.mediumHeight}
-                      largeWidth={ratios.largeWidth}
-                      largeHeight={ratios.largeHeight}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                      resizedImageOptions={extractResizedParams(content)}
-                    />
-                  )
-                  : (
-                    <PlaceholderImage
-                      smallWidth={ratios.smallWidth}
-                      smallHeight={ratios.smallHeight}
-                      mediumWidth={ratios.mediumWidth}
-                      mediumHeight={ratios.mediumHeight}
-                      largeWidth={ratios.largeWidth}
-                      largeHeight={ratios.largeHeight}
-                    />
-                  )
-                }
-              <PromoLabel type={promoType} />
-            </a>
+            <div className="col-sm-12 col-md-xl-4">
+              <a
+                href={content.website_url}
+                title={content && content.headlines ? content.headlines.basic : ''}
+              >
+                {
+                  customFields.imageOverrideURL || extractImageFromStory(content)
+                    ? (
+                      <Image
+                        url={customFields.imageOverrideURL
+                          ? customFields.imageOverrideURL : extractImageFromStory(content)}
+                        alt={content && content.headlines ? content.headlines.basic : ''}
+                        // medium is 16:9
+                        smallWidth={ratios.smallWidth}
+                        smallHeight={ratios.smallHeight}
+                        mediumWidth={ratios.mediumWidth}
+                        mediumHeight={ratios.mediumHeight}
+                        largeWidth={ratios.largeWidth}
+                        largeHeight={ratios.largeHeight}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizerURL={getProperties(arcSite)?.resizerURL}
+                        resizedImageOptions={extractResizedParams(content)}
+                      />
+                    )
+                    : (
+                      <PlaceholderImage
+                        smallWidth={ratios.smallWidth}
+                        smallHeight={ratios.smallHeight}
+                        mediumWidth={ratios.mediumWidth}
+                        mediumHeight={ratios.mediumHeight}
+                        largeWidth={ratios.largeWidth}
+                        largeHeight={ratios.largeHeight}
+                      />
+                    )
+                  }
+              </a>
+            </div>
           )}
           {/* customFields.headlinePosition === 'below' && */
           (customFields.showHeadline || customFields.showDescription

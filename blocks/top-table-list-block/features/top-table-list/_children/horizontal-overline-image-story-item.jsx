@@ -8,8 +8,6 @@ import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import PromoLabel from './promo_label';
-import discoverPromoType from './discover';
 
 const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
 

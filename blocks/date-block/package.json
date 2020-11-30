@@ -1,6 +1,10 @@
 {
   "name": "@wpmedia/date-block",
+<<<<<<< HEAD
   "version": "5.9.0-beta.0",
+=======
+  "version": "5.8.2",
+>>>>>>> stable
   "description": "Fusion News Theme date block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",

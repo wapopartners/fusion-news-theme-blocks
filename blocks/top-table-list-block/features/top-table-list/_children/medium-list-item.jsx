@@ -7,8 +7,6 @@ import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import PromoLabel from './promo_label';
-import discoverPromoType from './discover';
 
 const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
 
@@ -88,7 +86,6 @@ const MediumListItem = (props) => {
   };
 
   const ratios = ratiosFor('MD', imageRatio);
-  const promoType = discoverPromoType(element);
 
   return (
     <>
@@ -110,6 +107,7 @@ const MediumListItem = (props) => {
           )} */}
           {customFields.showImageMD
             && (
+<<<<<<< HEAD
             <a className="image-link" href={websiteURL} title={itemTitle}>
               {imageURL !== '' ? (
                 <Image
@@ -146,6 +144,56 @@ const MediumListItem = (props) => {
               )}
               <PromoLabel type={promoType} />
             </a>
+=======
+            <div className="col-sm-12 col-md-xl-4">
+              <a href={websiteURL} title={itemTitle}>
+                {imageURL !== '' ? (
+                  <Image
+                    resizedImageOptions={resizedImageOptions}
+                    url={imageURL}
+                    // todo: get the proper alt tag for this image
+                    // 16:9 aspect for medium
+                    alt={itemTitle}
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+                  />
+                ) : (
+                  <Image
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
+                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    url={targetFallbackImage}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizedImageOptions={placeholderResizedImageOptions}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+
+                  />
+                )}
+              </a>
+            </div>
+            )}
+          {(customFields.showHeadlineMD || customFields.showDescriptionMD
+                || customFields.showBylineMD || customFields.showDateMD)
+            && (
+            <div className={textClass}>
+              {headlineTmpl()}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
+              </div>
+            </div>
+>>>>>>> stable
             )}
           {/* customFields.headlinePositionMD === 'below' && */
             (customFields.showHeadlineMD

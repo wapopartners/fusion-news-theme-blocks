@@ -8,8 +8,11 @@ import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
+<<<<<<< HEAD
 
 const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+=======
+>>>>>>> stable
 
 const VerticalOverlineImageStoryItem = (props) => {
   const {
@@ -103,12 +106,16 @@ const VerticalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('XL', imageRatio);
+<<<<<<< HEAD
   // const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
+=======
+>>>>>>> stable
 
   return (
     <>
       <article className="container-fluid xl-large-promo" key={id}>
         <div className="row xl-promo-padding-bottom">
+<<<<<<< HEAD
           {(customFields.showHeadlineXL
             || customFields.showDescriptionXL
             || customFields.showBylineXL
@@ -170,6 +177,50 @@ const VerticalOverlineImageStoryItem = (props) => {
                 {byLineTmpl()}
                 {dateTmpl()}
               </div>
+=======
+          {(customFields.showHeadlineXL || customFields.showDescriptionXL
+              || customFields.showBylineXL || customFields.showDateXL)
+          && (
+          <div className="col-sm-xl-12 flex-col">
+            {overlineTmpl()}
+            {headlineTmpl()}
+            {customFields.showImageXL && imageURL !== '' ? (
+              <a href={websiteURL} title={itemTitle}>
+                <Image
+                  resizedImageOptions={resizedImageOptions}
+                  url={imageURL}
+                  // todo: get the proper alt tag for this image
+                  alt={itemTitle}
+                  smallWidth={ratios.smallWidth}
+                  smallHeight={ratios.smallHeight}
+                  mediumWidth={ratios.mediumWidth}
+                  mediumHeight={ratios.mediumHeight}
+                  largeWidth={ratios.largeWidth}
+                  largeHeight={ratios.largeHeight}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
+                />
+              </a>
+            ) : (
+              <Image
+                smallWidth={ratios.smallWidth}
+                smallHeight={ratios.smallHeight}
+                mediumWidth={ratios.mediumWidth}
+                mediumHeight={ratios.mediumHeight}
+                largeWidth={ratios.largeWidth}
+                largeHeight={ratios.largeHeight}
+                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                url={targetFallbackImage}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizedImageOptions={placeholderResizedImageOptions}
+                resizerURL={getProperties(arcSite)?.resizerURL}
+              />
+            )}
+            {descriptionTmpl()}
+            <div className="article-meta">
+              {byLineTmpl()}
+              {dateTmpl()}
+>>>>>>> stable
             </div>
           )}
         </div>

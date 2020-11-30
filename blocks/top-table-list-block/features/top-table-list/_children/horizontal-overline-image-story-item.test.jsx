@@ -1,6 +1,14 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+  resizerURL: 'resizer',
+}))));
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <img alt="test" />,
+}));
+
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -24,6 +32,7 @@ const config = {
   showImageSM: true,
 };
 
+<<<<<<< HEAD
 // const headBelowConfig = {
 //   showOverlineXL: true,
 //   showHeadlineXL: true,
@@ -67,11 +76,21 @@ describe('horizontal overline image story item', () => {
       Image: () => <img alt="test" />,
     }));
   });
+=======
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-sun',
+    globalContent: {},
+  })),
+}));
+>>>>>>> stable
 
-  afterAll(() => {
-    jest.resetModules();
-  });
+jest.mock('fusion:content', () => ({
+  useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
+}));
 
+describe('horizontal overline image story item', () => {
+  jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
   it('renders with the full required props', () => {
     const imageURL = 'pic';
     const websiteURL = 'url';
@@ -121,6 +140,12 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
   });
   it('renders with empty props with defaults', () => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {},
+      })),
+    }));
     const imageURL = '';
     const websiteURL = '';
     const itemTitle = '';
