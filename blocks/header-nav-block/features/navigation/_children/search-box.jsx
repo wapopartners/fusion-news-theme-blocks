@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const animationDurationMS = 250;
 
+// via https://www.joshwcomeau.com/react/prefers-reduced-motion/
 function getPrefersReducedMotion() {
   const QUERY = '(prefers-reduced-motion: no-preference)';
   const mediaQueryList = window.matchMedia(QUERY);
@@ -21,7 +22,10 @@ const StyledInput = styled.input`
 
 function SearchBox({
   alwaysOpen = false,
-  iconSize = 16, placeholderText, navBarColor = 'dark', customSearchAction = null,
+  iconSize = 16,
+  placeholderText,
+  navBarColor = 'dark',
+  customSearchAction = null,
 }) {
   const [isSearchInputOpen, setSearchInputOpen] = useState(alwaysOpen);
   const [isPending, setIsPending] = useState(false);
@@ -34,7 +38,11 @@ function SearchBox({
         setIsPending(false);
       }, animationDurationMS);
     }
-  }, [isSearchInputOpen, setIsPending, preferReducedMotion]);
+
+    if (alwaysOpen) {
+      searchInput.current.focus();
+    }
+  }, [isSearchInputOpen, setIsPending, preferReducedMotion, alwaysOpen]);
 
   function handleClick(e) {
     if (isSearchInputOpen) {
@@ -44,12 +52,15 @@ function SearchBox({
       } else {
         window.location.href = `/search/${searchInput.current.value}`;
       }
-      if (
-        !preferReducedMotion
-      ) {
-        setIsPending(true);
+
+      if (!alwaysOpen) {
+        if (
+          !preferReducedMotion
+        ) {
+          setIsPending(true);
+        }
+        setSearchInputOpen(false);
       }
-      setSearchInputOpen(false);
       searchInput.current.value = '';
     } else {
       searchInput.current.focus();
