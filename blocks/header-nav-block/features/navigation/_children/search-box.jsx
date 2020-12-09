@@ -1,45 +1,66 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
+import styled from 'styled-components';
 
-export default ({
-  alwaysOpen = false, iconSize = 16, placeholderText, navBarColor = 'dark', customSearchAction = null,
-}) => {
-  const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
+const animationDurationMS = 250;
+
+function getPrefersReducedMotion() {
+  const QUERY = '(prefers-reduced-motion: no-preference)';
+  const mediaQueryList = window.matchMedia(QUERY);
+  const prefersReducedMotion = !mediaQueryList.matches;
+  return prefersReducedMotion;
+}
+
+const StyledInput = styled.input`
+  transition: all ${animationDurationMS}ms cubic-bezier(0.49, 0.37, 0.45, 0.71);
+
+  @media screen and (prefers-reduced-motion: reduce) { 
+    transition: none !important;
+  }
+`;
+
+function SearchBox({
+  alwaysOpen = false,
+  iconSize = 16, placeholderText, navBarColor = 'dark', customSearchAction = null,
+}) {
+  const [isSearchInputOpen, setSearchInputOpen] = useState(alwaysOpen);
+  const [isPending, setIsPending] = useState(false);
   const searchInput = useRef(null);
-  let disabledBtn = true;
+  const preferReducedMotion = getPrefersReducedMotion();
 
   useEffect(() => {
-    const el = searchInput.current;
-    if (shouldSearchOpen) {
-      el.focus();
-      // Wait for open searchbar animation to finish
+    if (!preferReducedMotion) {
       setTimeout(() => {
-        disabledBtn = false;
-      }, 250);
-    } else {
-      el.blur();
+        setIsPending(false);
+      }, animationDurationMS);
     }
-  }, [shouldSearchOpen]);
+  }, [isSearchInputOpen, setIsPending, preferReducedMotion]);
 
-  const handleSearchBtnMousedown = (event) => {
-    // if open, prevent blur event so we don't get a race condition on click vs blur
-    if (shouldSearchOpen) {
-      event.preventDefault();
-    } else {
-      setShouldSearchOpen(true);
-    }
-  };
-
-  const handleClick = (event) => {
-    if (!disabledBtn) {
-      event.preventDefault();
+  function handleClick(e) {
+    if (isSearchInputOpen) {
+      e.preventDefault();
       if (customSearchAction) {
         customSearchAction(searchInput.current.value);
       } else {
         window.location.href = `/search/${searchInput.current.value}`;
       }
+      if (
+        !preferReducedMotion
+      ) {
+        setIsPending(true);
+      }
+      setSearchInputOpen(false);
+      searchInput.current.value = '';
+    } else {
+      searchInput.current.focus();
+      if (
+        !preferReducedMotion
+      ) {
+        setIsPending(true);
+      }
+      setSearchInputOpen(true);
     }
-  };
+  }
 
   const handleKey = (event) => {
     if (event.key === 'Enter') {
@@ -52,23 +73,29 @@ export default ({
     }
   };
 
-  const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-  const navClassNames = `nav-block-search ${isSearchBarOpen ? 'open' : ''} ${navBarColor === 'light' ? 'light' : 'dark'}`;
-  const btnClassNames = `nav-btn ${navBarColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'} transparent${!isSearchBarOpen ? ' border' : ''}`;
-  const iconFill = isSearchBarOpen ? '#666666' : null;
+  const navClassNames = `nav-block-search ${isSearchInputOpen ? 'open' : ''} ${navBarColor === 'light' ? 'light' : 'dark'}`;
+  const btnClassNames = `nav-btn ${navBarColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'} transparent${!isSearchInputOpen ? ' border' : ''}`;
+  const iconFill = isSearchInputOpen ? '#666666' : null;
 
   return (
     <div className={navClassNames}>
-      <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder={placeholderText} />
+      <StyledInput
+        ref={searchInput}
+        onKeyDown={handleKey}
+        type="text"
+        placeholder={placeholderText}
+      />
       <button
         className={btnClassNames}
         onClick={handleClick}
-        onMouseDown={handleSearchBtnMousedown}
         type="button"
-        aria-label={shouldSearchOpen ? "Search the site's content" : 'Open the search input to search the site'}
+        disabled={isPending}
+        aria-label={isSearchInputOpen ? "Search the site's content" : 'Open the search input to search the site'}
       >
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
       </button>
     </div>
   );
-};
+}
+
+export default SearchBox;
